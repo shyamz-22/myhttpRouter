@@ -1,10 +1,7 @@
 # HTTP ROUTER
 
 A very naive implementation of http router that supports path param parsing, suitable
-for most REST implementations.
-
-Inspired by [httprouter](https://github.com/julienschmidt/httprouter/blob/master/params_go17.go)
-
+for most REST implementations. Inspired by [httprouter](https://github.com/julienschmidt/httprouter/blob/master/params_go17.go)
 
 ## Usage
 
@@ -71,4 +68,13 @@ Entering interactive mode (type "help" for commands, "o" for options)
 (pprof) top
 (pprof) list findRoute
 
+```
+
+## Setup
+
+```bash
+> go get github.com/shyamz-22/router
+> cd $GOPATH/github.com/shyamz-22/router
+> dep ensure -update
+> go test ./...
 ```
