@@ -1,7 +1,9 @@
 # HTTP ROUTER
 
-A very naive implementation of http router that supports path param parsing that is suitable
-for most REST implementations
+A very naive implementation of http router that supports path param parsing, suitable
+for most REST implementations.
+
+Inspired by [httprouter](https://github.com/julienschmidt/httprouter/blob/master/params_go17.go)
 
 
 ## Usage
