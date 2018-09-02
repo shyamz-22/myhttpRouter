@@ -34,8 +34,7 @@ func main() {
 ## Running tests
 
 ```bash
-> cd myhttpRouter
-> go test ./...
+> go test -v ./...
 
 ```
 
