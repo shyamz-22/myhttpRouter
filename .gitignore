@@ -1,0 +1,7 @@
+**.test
+
+.idea/
+
+**.out
+
+vendor/
