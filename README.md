@@ -81,3 +81,11 @@ Entering interactive mode (type "help" for commands, "o" for options)
 > dep ensure -update
 > go test ./...
 ```
+
+## What is not supported yet
+
+- Support for http.Handler
+- Behavior for trailing slashes
+- Configurable NotFound and MethodNotAllowed Handlers
+- Panic Handling
+- Regexp validation for path parameters
