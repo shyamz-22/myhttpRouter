@@ -11,11 +11,6 @@ const (
 	sepChar          = '/'
 )
 
-type param struct {
-	key   string
-	value string
-}
-
 type node struct {
 	path     string
 	handle   HandlerFuncWithParam
@@ -48,11 +43,11 @@ func (n *node) addRoute(path string, handler HandlerFuncWithParam) {
 //		paramSize: path param current size
 //		nextSepIndex : Index Byte of next / found in path
 
-func (n *node) findRoute(path string) (HandlerFuncWithParam, []param) {
+func (n *node) findRoute(path string) (HandlerFuncWithParam, []Param) {
 	var (
 		child      *node
-		p          param
-		params     []param
+		p          Param
+		params     []Param
 		paramsSize int
 	)
 
@@ -89,11 +84,11 @@ func (n *node) findRoute(path string) (HandlerFuncWithParam, []param) {
 			child, p = findPath(n, child, part, isRoot)
 
 			// collect path params
-			if len(p.key) > 0 {
+			if len(p.Key) > 0 {
 
 				// lazy initialization
 				if params == nil {
-					params = make([]param, 0, parts)
+					params = make([]Param, 0, parts)
 				}
 
 				paramsSize = len(params)
@@ -113,8 +108,8 @@ func (n *node) findRoute(path string) (HandlerFuncWithParam, []param) {
 	return child.handle, params[:paramsSize]
 }
 
-func findPath(root, child *node, part string, isRoot bool) (*node, param) {
-	var p param
+func findPath(root, child *node, part string, isRoot bool) (*node, Param) {
+	var p Param
 
 	if isRoot {
 		child, p = findChild(root, part)
@@ -151,8 +146,8 @@ func (n *node) insertChild(part string) (*node) {
 	return child
 }
 
-func findChild(n *node, path string) (*node, param) {
-	p := param{}
+func findChild(n *node, path string) (*node, Param) {
+	p := Param{}
 
 	for _, child := range n.children {
 		// actual match
@@ -162,8 +157,8 @@ func findChild(n *node, path string) (*node, param) {
 
 		// path param match
 		if child.path[0] == pathParamSepChar {
-			p.key = child.path[1:]
-			p.value = path
+			p.Key = child.path[1:]
+			p.Value = path
 
 			return child, p
 		}

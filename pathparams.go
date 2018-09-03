@@ -1,11 +1,16 @@
 package router
 
-type PathParams []param
+type Param struct {
+	Key   string
+	Value string
+}
+
+type PathParams []Param
 
 func (params PathParams) ByName(name string) string {
 	for _, p := range params {
-		if p.key == name {
-			return p.value
+		if p.Key == name {
+			return p.Value
 		}
 	}
 

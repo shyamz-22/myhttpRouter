@@ -9,6 +9,7 @@ for most REST implementations. Inspired by [httprouter](https://github.com/julie
 package main
 
 import (
+	"fmt"
 	"github.com/shyamz-22/router"
 	"log"
 	"net/http"
@@ -23,7 +24,9 @@ func main() {
 	})
 	
 	rtr.Add("/pings/:id", http.MethodGet, func(w http.ResponseWriter, r *http.Request, params router.PathParams) {
-    		w.Write([]byte("Pong!"))
+    	id := params.ByName("id")	
+    	response := fmt.Sprintf("Pong: %s", id)
+		w.Write([]byte(response))
     	})
 	
     log.Fatal(http.ListenAndServe(":8080", rtr))
