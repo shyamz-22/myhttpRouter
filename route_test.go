@@ -42,6 +42,38 @@ func TestRoute(t *testing.T) {
 
 		assert.ResponseWithBody(t, w, http.StatusOK, "Pong back!")
 	})
+
+	t.Run("adds a static route with file extension", func(t *testing.T) {
+		rtr := New()
+		rtr.Add("/articles/", http.MethodGet, func(w http.ResponseWriter, r *http.Request, params PathParams) {
+			w.Write(pong)
+		})
+
+		rtr.Add("/articles/go_command.html", http.MethodGet, func(w http.ResponseWriter, r *http.Request, params PathParams) {
+			w.Write(pongBack)
+		})
+
+		w := httptest.NewRecorder()
+		r, _ := http.NewRequest(http.MethodGet, "/articles/go_command.html", nil)
+
+		rtr.ServeHTTP(w, r)
+
+		assert.ResponseWithBody(t, w, http.StatusOK, "Pong back!")
+	})
+
+	t.Run("adds a static route with leading slash", func(t *testing.T) {
+		rtr := New()
+		rtr.Add("/articles/", http.MethodGet, func(w http.ResponseWriter, r *http.Request, params PathParams) {
+			w.Write(pong)
+		})
+
+		w := httptest.NewRecorder()
+		r, _ := http.NewRequest(http.MethodGet, "/articles/", nil)
+
+		rtr.ServeHTTP(w, r)
+
+		assert.ResponseWithBody(t, w, http.StatusOK, "Pong!")
+	})
 }
 
 func TestRouteWithNotFoundPaths(t *testing.T) {

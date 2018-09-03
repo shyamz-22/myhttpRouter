@@ -156,7 +156,7 @@ func findChild(n *node, path string) (*node, Param) {
 		}
 
 		// path param match
-		if child.path[0] == pathParamSepChar {
+		if len(child.path) > 0 && child.path[0] == pathParamSepChar {
 			p.Key = child.path[1:]
 			p.Value = path
 
