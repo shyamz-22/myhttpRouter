@@ -50,6 +50,42 @@ func (rtr *Router) Add(path string, method string, handler HandlerFuncWithParam)
 	root.addRoute(path, handler)
 }
 
+// AddGet registers a new request handle with the given path and Get-method.
+func (rtr *Router) AddGet(path string, handler HandlerFuncWithParam) {
+	rtr.Add(path, http.MethodGet, handler)
+
+}
+
+// AddPost registers a new request handle with the given path and Post-method.
+func (rtr *Router) AddPost(path string, handler HandlerFuncWithParam) {
+	rtr.Add(path, http.MethodPost, handler)
+}
+
+// AddPut registers a new request handle with the given path and Put-method.
+func (rtr *Router) AddPut(path string, handler HandlerFuncWithParam) {
+	rtr.Add(path, http.MethodPut, handler)
+}
+
+// AddDelete registers a new request handle with the given path and Delete-method.
+func (rtr *Router) AddDelete(path string, handler HandlerFuncWithParam) {
+	rtr.Add(path, http.MethodDelete, handler)
+}
+
+// AddOptions registers a new request handle with the given path and Options-method.
+func (rtr *Router) AddOptions(path string, handler HandlerFuncWithParam) {
+	rtr.Add(path, http.MethodOptions, handler)
+}
+
+// AddPatch registers a new request handle with the given path and Patch-method.
+func (rtr *Router) AddPatch(path string, handler HandlerFuncWithParam) {
+	rtr.Add(path, http.MethodPatch, handler)
+}
+
+// AddHead registers a new request handle with the given path and Head-method.
+func (rtr *Router) AddHead(path string, handler HandlerFuncWithParam) {
+	rtr.Add(path, http.MethodHead, handler)
+}
+
 func handleError(router *Router, writer http.ResponseWriter, path, requestMethod string) {
 	status := http.StatusNotFound
 
